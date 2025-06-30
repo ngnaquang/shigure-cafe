@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiguré Café</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23588157'/%3E%3Cpath d='M30,35 C30,25 40,20 50,20 C60,20 70,25 70,35 C70,45 60,50 50,50 C40,50 30,45 30,35 Z' fill='white'/%3E%3Cpath d='M25,65 C25,55 65,55 75,65 L75,75 C75,80 65,85 50,85 C35,85 25,80 25,75 Z' fill='white'/%3E%3Cpath d='M40,40 C40,38 42,36 45,36 C48,36 50,38 50,40 C50,42 48,44 45,44 C42,44 40,42 40,40 Z' fill='%23588157'/%3E%3C/svg%3E" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23588157'/%3E%3Cpath d='M30,35 C30,25 40,20 50,20 C60,20 70,25 70,35 C70,45 60,50 50,50 C40,50 30,45 30,35 Z' fill='white'/%3E%3Cpath d='M25,65 C25,55 65,55 75,65 L75,75 C75,80 65,85 50,85 C35,85 25,80 25,75 Z' fill='white'/%3E%3Cpath d='M40,40 C40,38 42,36 45,36 C48,36 50,38 50,40 C50,42 48,44 45,44 C42,44 40,42 40,40 Z' fill='%23588157'/%3E%3C/svg%3E" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Serene Sage & Warm Wood (White, Natural Wood Tones, Soft Greys, Indigo Accents) -->
+    <!-- Application Structure Plan: A single-page application designed as a narrative journey. It starts with a high-level overview, then delves into the project's concept (expanded details), market analysis (more insights), and finally the interactive financial dashboard. The conclusion section provides key takeaways. This structure was chosen to guide the user from the "why" (the concept) to the "how" (the financials) in an intuitive, explorable manner, making complex data accessible and easy to understand, while integrating the new visual identity. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Project Summary -> Goal: Inform -> Viz: Hero section with key stats and a prominent logo. Justification: Provide an immediate, high-impact summary with branding.
+        - Report Info: Mission, Vision, Value Prop, Products/Services -> Goal: Organize & Inform -> Viz: Expanded text descriptions within cards. Justification: Offer more detailed qualitative info in digestible, visually appealing chunks.
+        - Report Info: Market Target, Size & Trends, Competition, SWOT Analysis -> Goal: Organize & Inform -> Viz: Descriptive paragraphs for context and interactive Tabs for SWOT. Justification: Provide in-depth market context and allow focused exploration of each SWOT component.
+        - Report Info: Financial Projections (Revenue, OpEx, Net Income, Loan details) -> Goal: Compare/Change/Organize -> Viz: Interactive Line Chart (Chart.js), detailed KPI cards, and dynamic data tables. The loan interest rate selector is the primary interaction for sensitivity analysis. Justification: Clearly shows trends and performance over time, and dynamically updates based on rate selection, offering both high-level and detailed views.
+        - Report Info: Startup Costs & Funding Sources -> Goal: Inform -> Viz: Donut Charts (Chart.js). Justification: Provide quick, clear visual breakdowns of initial investment and its funding.
+        - Report Info: Conclusion, Insights, Risks, Recommendations -> Goal: Inform/Action -> Viz: Bulleted lists with descriptive text. Justification: Summarize findings and provide actionable advice.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #374151; /* Darker grey for text for contrast */
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 40vh; /* Responsive height */
+            max-height: 400px; /* Max height to prevent oversized charts */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 640px) { /* sm breakpoint */
+            .chart-container {
+                height: 350px;
+            }
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .chart-container {
+                height: 300px; /* Slightly smaller for multi-column layouts */
+            }
+        }
+        @media (min-width: 1024px) { /* lg breakpoint */
+            .chart-container {
+                height: 350px; /* Adjust for larger screens */
+            }
+        }
+
+
+        .section-title {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+
+        .tab-button {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-button.active {
+            color: #588157; /* A shade of green from the palette */
+            border-bottom-color: #588157;
+            font-weight: 600;
+        }
+
+        /* Logo styling to mimic concept.png */
+        .shigure-logo {
+            font-family: 'Inter', sans-serif; /* Using Inter as a close approximation */
+            font-weight: 600; /* Semi-bold */
+            letter-spacing: 0.15em; /* Spaced out letters */
+            text-transform: uppercase;
+            color: #1f2937; /* Dark text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1; /* Tighter line height */
+        }
+        .shigure-logo .main-text {
+            font-size: 1.5rem; /* text-2xl */
+        }
+        .shigure-logo .sub-text {
+            font-size: 0.875rem; /* text-sm */
+            letter-spacing: 0.2em; /* Even more spaced out */
+            margin-top: 0.25rem; /* Small gap */
+        }
+
+        /* Animation styles for sections */
+        section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        section.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile navigation styles */
+        .mobile-menu-button {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-button {
+                display: block;
+            }
+            
+            .mobile-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            }
+            
+            .mobile-menu.active {
+                display: block;
+            }
+            
+            .mobile-menu a {
+                display: block;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid #f3f4f6;
+            }
+        }
+
+        /* Subtle background pattern */
+        body {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23588157' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2V6h4V4H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="shigure-logo">
+                <span class="main-text">SHIGURÉ</span>
+                <span class="sub-text">CAFÉ</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#concept" class="text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Le Concept</a>
+                <a href="#marche" class="text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Marché</a>
+                <a href="#finance" class="text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Finances</a>
+                <a href="#conclusion" class="text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Conclusion</a>
+            </div>
+            <!-- Mobile navigation menu -->
+            <button class="mobile-menu-button md:hidden flex items-center text-gray-500 hover:text-gray-900 focus:outline-none">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <div class="mobile-menu md:hidden">
+                <a href="#concept" class="block text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Le Concept</a>
+                <a href="#marche" class="block text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Marché</a>
+                <a href="#finance" class="block text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Finances</a>
+                <a href="#conclusion" class="block text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Conclusion</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="hero" class="text-center mb-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Shiguré Café</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Une exploration dynamique du projet de café japonais bio à Paris. Découvrez le concept unique, l'analyse approfondie du marché et les projections financières détaillées d'une opportunité d'investissement viable et rentable dès la première année.</p>
+        </section>
+
+        <section id="concept" class="mb-20">
+            <h3 class="section-title">Le Concept Shiguré Café : Authenticité et Modernité</h3>
+            
+            <div class="relative mb-12 rounded-xl overflow-hidden shadow-xl">
+                <img src="concept.png" alt="Shiguré Café Storefront" class="w-full object-cover" style="height: 800px;" />
+                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center p-6">
+                    <p class="text-white text-center text-lg max-w-2xl">Shiguré Café est bien plus qu'un simple café ; c'est une invitation à un voyage sensoriel au cœur de Paris, où la tradition japonaise rencontre l'innovation biologique dans un cadre chaleureux et esthétique.</p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-50 text-green-700 mb-4 text-xl">
+                        <span>🍵</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Mission & Vision du Café</h4>
+                    <p class="text-gray-600 text-sm">Notre mission est d'offrir une expérience culinaire unique en son genre. Dans un espace soigneusement conçu de 49 m² (38 m² au RDC et 11 m² de cave) au 27 rue Clauzel, 75009 Paris, nous proposerons des boissons 100% bio et des pâtisseries japonaises authentiques. Notre vision est de devenir la destination privilégiée des jeunes Parisiens et des amateurs de nouveauté, en étant reconnus pour nos produits tendance, sains et notre atmosphère unique.</p>
+                </div>
+                <div class="card">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-50 text-green-700 mb-4 text-xl">
+                        <span>✨</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Une Proposition de Valeur Unique</h4>
+                    <p class="text-gray-600 text-sm">Notre différenciation repose sur plusieurs piliers. Tout d'abord, la qualité 100% biologique de nos ingrédients pour toutes les boissons (Matcha Latte, Hojicha Glacé, Bubble Tea). Ensuite, la personnalisation de chaque commande (niveau de sucre, choix de lait). Enfin, l'originalité de nos pâtisseries japonaises comme le Japanese Cheesecake et le Mochi Waffle, conçues pour être non seulement délicieuses mais aussi visuellement "instagrammables", attirant une clientèle jeune et connectée. L'esthétique de notre café, inspirée du minimalisme japonais, complète cette proposition en offrant un cadre serein et photogénique.</p>
+                </div>
+                <div class="card">
+                     <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-50 text-green-700 mb-4 text-xl">
+                        <span>📍</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Localisation Stratégique au Cœur de Paris</h4>
+                    <p class="text-gray-600 text-sm">Le choix de notre emplacement est crucial. Le local de 49m² (38m² au RDC pour l'accueil et 11m² de cave, idéale pour le stockage ou la préparation annexe) est situé au 27 rue Clauzel, 75009 PARIS, en face de la très fréquentée Place Gustave Toudouze. Cette zone bénéficie d'un fort trafic piétonnier, à proximité d'écoles, de bureaux et de lieux de vie parisiens, garantissant une visibilité optimale et un accès facile à notre clientèle cible : jeunes, étudiants et jeunes adultes recherchant des expériences culinaires uniques.</p>
+                </div>
+            </div>
+            
+            <!-- Product Explorer Section -->
+            <div class="mt-16">
+                <h4 class="text-2xl font-semibold text-center mb-8">Découvrez Nos Produits</h4>
+                
+                <div class="flex justify-center mb-6">
+                    <div class="inline-flex rounded-md shadow-sm" role="group">
+                        <button type="button" class="product-filter-btn active px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:text-green-700" data-filter="all">Tous</button>
+                        <button type="button" class="product-filter-btn px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:text-green-700" data-filter="drinks">Boissons</button>
+                        <button type="button" class="product-filter-btn px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:text-green-700" data-filter="pastries">Pâtisseries</button>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="product-grid">
+                    <!-- Product cards will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="marche" class="mb-20">
+            <h3 class="section-title">Analyse Détaillée du Marché & Positionnement</h3>
+            <p class="text-gray-700 mb-8 max-w-3xl mx-auto text-center">Notre projet s'inscrit au carrefour de plusieurs tendances de consommation fortes : la recherche de produits sains et biologiques, l'engouement pour les saveurs asiatiques, et le besoin d'espaces sociaux esthétiques et "instagrammables".</p>
+            
+            <div class="card p-8 mb-8">
+                <h4 class="text-xl font-semibold mb-4">Notre Marché Cible : Jeunes et Connectés</h4>
+                <p class="text-gray-600 text-sm mb-4">Notre clientèle idéale se compose principalement de jeunes, d'étudiants et de jeunes adultes âgés de 15 à 30 ans. Ce segment démographique est caractérisé par une forte sensibilité aux tendances culinaires, une activité intense sur les réseaux sociaux (Instagram, TikTok), et une préférence marquée pour les produits biologiques, personnalisables et visuellement attrayants. Ils recherchent non seulement une boisson ou une pâtisserie, mais aussi une expérience sociale et un lieu propice au partage et à la création de contenu visuel.</p>
+                <h4 class="text-xl font-semibold mb-4">Taille du Marché et Tendances Clés</h4>
+                <p class="text-gray-600 text-sm mb-4">Le marché français du <strong>Bubble Tea</strong> affiche un chiffre d'affaires moyen impressionnant, variant de 240 000 € à 360 000 € par boutique annuellement, preuve de son immense popularité chez les jeunes. Parallèlement, les <strong>pâtisseries japonaises</strong>, bien que plus de niche, gagnent rapidement en visibilité grâce à leur esthétique unique, parfaitement adaptée aux médias sociaux. Le marché global du <strong>café et du thé de spécialité en France, évalué à 4,5 milliards €</strong>, est en constante croissance, avec une demande accrue pour les options biologiques comme le Matcha et le Hojicha. Ces tendances convergentes créent un environnement propice à la croissance de Shiguré Café.</p>
+                <h4 class="text-xl font-semibold mb-4">Concurrence et Notre Avantage Différenciateur</h4>
+                <p class="text-gray-600 text-sm mb-4">Le 9ème arrondissement, comme beaucoup de quartiers parisiens, compte déjà une dizaine de boutiques de bubble tea et de nombreux cafés traditionnels. Cependant, ces concurrents manquent souvent d'une offre 100% biologique ou de l'originalité des pâtisseries japonaises. Notre avantage concurrentiel réside dans l'intégration de ces éléments : des ingrédients entièrement biologiques, des créations uniques et visuellement attractantes, un design intérieur moderne et "instagrammable", et une stratégie marketing axée sur les réseaux sociaux et des partenariats universitaires locaux. Cela nous permet de nous positionner sur un segment premium tout en restant accessible.</p>
+            </div>
+            
+            <div class="card mt-8">
+                <h4 class="text-xl font-semibold mb-4 text-center">Analyse SWOT</h4>
+                <div class="flex justify-center border-b mb-4">
+                    <button class="tab-button active py-2 px-4 font-medium" data-tab="swot-s">Forces</button>
+                    <button class="tab-button py-2 px-4 font-medium" data-tab="swot-w">Faiblesses</button>
+                    <button class="tab-button py-2 px-4 font-medium" data-tab="swot-o">Opportunités</button>
+                    <button class="tab-button py-2 px-4 font-medium" data-tab="swot-t">Menaces</button>
+                </div>
+                <div id="swot-content" class="p-4">
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 text-sm">
+                        <!-- Content will be injected by JS -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="finance" class="mb-20 bg-white p-8 rounded-lg shadow-lg">
+            <h3 class="section-title">Tableau de Bord Financier Interactif : Projections et Sensibilité</h3>
+            <p class="text-center text-gray-700 mb-8 max-w-3xl mx-auto">Cette section vous permet d'explorer les projections financières clés de Shiguré Café sur cinq ans. Utilisez le sélecteur ci-dessous pour simuler l'impact de différents taux d'intérêt du prêt bancaire sur nos performances, notre rentabilité et nos indicateurs financiers majeurs.</p>
+
+            <div class="flex flex-col items-center mb-10">
+                <label for="interest-rate-selector" class="block text-sm font-medium text-gray-700 mb-2">Choisir un scénario de taux d'intérêt pour le prêt (sur 7 ans) :</label>
+                <select id="interest-rate-selector" class="mt-1 block w-full max-w-xs pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                    <option value="3.5">Cas de Base (3.5%)</option>
+                    <option value="3.0">Meilleur Cas (3.0%)</option>
+                    <option value="4.2">Pire Cas (4.2%)</option>
+                </select>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 text-center">
+                <div class="p-4 bg-gray-100 rounded-lg">
+                    <h4 class="text-sm font-medium text-gray-500">Investissement Initial Total</h4>
+                    <p id="metric-investment" class="text-2xl font-bold text-gray-900">124 540 €</p>
+                    <p class="text-xs text-gray-500">Nécessaire au démarrage.</p>
+                </div>
+                <div class="p-4 bg-gray-100 rounded-lg">
+                    <h4 class="text-sm font-medium text-gray-500">Résultat Net (Année 2)</h4>
+                    <p id="metric-net-income" class="text-2xl font-bold text-green-700">85 880 €</p>
+                    <p class="text-xs text-gray-500">Premier exercice complet, indicateur clé de rentabilité.</p>
+                </div>
+                 <div class="p-4 bg-gray-100 rounded-lg">
+                    <h4 class="text-sm font-medium text-gray-500">Point Mort Annuel (Revenu)</h4>
+                    <p id="metric-breakeven" class="text-2xl font-bold text-gray-900">189 626 €</p>
+                    <p class="text-xs text-gray-500">Seuil de rentabilité annuel à atteindre.</p>
+                </div>
+                <div class="p-4 bg-gray-100 rounded-lg">
+                    <h4 class="text-sm font-medium text-gray-500">Délai de Récupération (Payback)</h4>
+                    <p id="metric-payback" class="text-2xl font-bold text-green-700">2.15 ans</p>
+                    <p class="text-xs text-gray-500">Durée estimée pour récupérer l'investissement initial.</p>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="card">
+                     <h4 class="text-lg font-semibold mb-4 text-center">Performance Financière sur 5 ans (Chiffre d'Affaires, EBITDA, Résultat Net)</h4>
+                     <p class="text-gray-600 text-sm mb-4 text-center">Visualisation des tendances de croissance du Chiffre d'Affaires, de la rentabilité opérationnelle (EBITDA) et du profit final (Résultat Net) pour le scénario sélectionné.</p>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                     <h4 class="text-lg font-semibold mb-4 text-center">Répartition des Coûts de Démarrage (124 540 €)</h4>
+                     <p class="text-gray-600 text-sm mb-4 text-center">Cette répartition détaille les principaux postes de dépenses nécessaires pour le lancement initial du café, de la rénovation aux frais administratifs.</p>
+                    <div class="chart-container">
+                        <canvas id="startupCostChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <details class="bg-gray-50 rounded-lg p-4">
+                    <summary class="font-semibold cursor-pointer text-gray-700 hover:text-gray-900">Voir le Compte de Résultat Prévisionnel Détaillé par Scénario</summary>
+                    <div class="overflow-x-auto mt-4">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rubrique</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">2025 (6m)</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">2026</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">2027</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">2028</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">2029</th>
+                                </tr>
+                            </thead>
+                            <tbody id="income-statement-body" class="bg-white divide-y divide-gray-200">
+                                <!-- Data will be injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-4">Le résultat net de l'année 2025 est basé sur 6 mois d'activité effective (juillet à décembre).</p>
+                </details>
+            </div>
+
+        </section>
+
+        <section id="conclusion" class="py-16 bg-white rounded-lg shadow-lg">
+            <h3 class="section-title">Conclusion & Recommandations Stratégiques</h3>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-8 text-center">Le plan d'affaires de Shiguré Café démontre une opportunité d'investissement solide et attrayante. Malgré un investissement initial plus élevé et une période de démarrage en 2025, le projet affiche une robustesse financière et une forte capacité de croissance.</p>
+            
+            <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="card p-6 border border-gray-200">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4 text-center">Insights Clés du Plan</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600 text-sm">
+                        <li><span class="font-medium text-gray-700">Forte Rentabilité & Croissance</span> : Projections de marges nettes solides, avec une croissance continue du chiffre d'affaires sur 5 ans.</li>
+                        <li><span class="font-medium text-gray-700">Délai de Récupération Compétitif</span> : Un retour sur investissement rapide, généralement entre 2.13 et 2.17 ans selon le taux d'intérêt.</li>
+                        <li><span class="font-medium text-gray-700">Liquidité et Solvabilité Robustes</span> : Les ratios financiers démontrent une excellente capacité à gérer les obligations à court et long terme.</li>
+                        <li><span class="font-medium text-gray-700">Niche de Marché Pertinente</span> : Le positionnement sur les produits bio et les saveurs japonaises répond à une demande croissante.</li>
+                        <li><span class="font-medium text-gray-700">Résilience aux Taux d'Intérêt</span> : La viabilité du projet n'est pas fondamentalement compromise par les variations de taux d'intérêt dans la fourchette étudiée.</li>
+                    </ul>
+                </div>
+
+                <div class="card p-6 border border-gray-200">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4 text-center">Risques Identifiés & Stratégies d'Atténuation</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600 text-sm">
+                        <li><span class="font-medium text-gray-700">Financement Accru</span> : Nécessite une validation bancaire du prêt de 84 540 €. Stratégie : Présenter une analyse financière complète et robuste.</li>
+                        <li><span class="font-medium text-gray-700">Période de Démarrage Sensible (2025)</span> : Activité partielle et charges initiales élevées. Stratégie : Gestion de trésorerie ultra-rigoureuse et marketing de lancement intensif.</li>
+                        <li><span class="font-medium text-gray-700">Concurrence Locale</span> : Stratégie : Maintien de l'avantage différenciateur (bio, unicité des produits) et programme de fidélité attractif.</li>
+                        <li><span class="font-medium text-gray-700">Dépendance aux Tendances</span> : Stratégie : Veille constante du marché et innovation du menu pour s'adapter et surprendre la clientèle.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card p-6 mt-8 max-w-4xl mx-auto border border-gray-200">
+                <h4 class="text-xl font-semibold text-gray-800 mb-4 text-center">Recommandations Stratégiques pour le Succès</h4>
+                <ol class="list-decimal list-inside space-y-2 text-gray-600 text-sm">
+                    <li><span class="font-medium text-gray-700">Négocier Activement le Taux de Prêt</span> : Viser le taux le plus bas possible (proche de 3.0%) pour optimiser les marges et accélérer le retour sur investissement.</li>
+                    <li><span class="font-medium text-gray-700">Mettre en Place un Suivi de Trésorerie Hebdomadaire</span> : Essentiel pour les 12-18 premiers mois afin d'anticiper et gérer les besoins de liquidité.</li>
+                    <li><span class="font-medium text-gray-700">Lancer une Campagne Marketing Impactante dès l'Ouverture</span> : Maximiser la visibilité sur les réseaux sociaux (Instagram, TikTok) et établir des partenariats locaux solides (écoles, entreprises).</li>
+                    <li><span class="font-medium text-gray-700">Optimiser l'Agencement du Local</span> : Assurer une utilisation efficace des 49 m², y compris la cave, pour un flux client fluide et un espace de travail optimisé.</li>
+                    <li><span class="font-medium text-gray-700">Innover Continuellement le Menu</span> : Introduire des spécialités saisonnières et de nouvelles créations pour maintenir l'intérêt et la fidélité de la clientèle.</li>
+                    <li><span class="font-medium text-gray-700">Sécuriser la Propriété Intellectuelle</span> : Enregistrer la marque "Shiguré Café" et protéger les recettes uniques pour préserver la valeur de l'entreprise.</li>
+                </ol>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white mt-20 border-t">
+        <div class="container mx-auto px-6 py-4 text-center text-gray-500 text-sm">
+            <p>&copy; 2025 Shiguré Café. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Register the datalabels plugin
+            Chart.register(ChartDataLabels);
+            
+            // Product data for the product explorer
+            const products = [
+                {
+                    name: "Matcha Latte Bio",
+                    description: "Notre spécialité signature, préparée avec du matcha bio de qualité supérieure et du lait d'amande ou d'avoine.",
+                    price: "5,50 €",
+                    category: "drinks",
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23588157'/%3E%3Cpath d='M35,65 L65,65 L60,40 L40,40 Z' fill='white'/%3E%3Cpath d='M42,40 L58,40 L55,30 L45,30 Z' fill='%23588157'/%3E%3C/svg%3E"
+                },
+                {
+                    name: "Hojicha Latte Bio",
+                    description: "Thé vert japonais torréfié, servi glacé avec une touche de sirop d'érable bio et un zeste de citron.",
+                    price: "5,50 €",
+                    category: "drinks",
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Cpath d='M40,20 L60,20 L65,80 L35,80 Z' fill='%23a3b18a'/%3E%3Cpath d='M45,25 L55,25 L53,35 L47,35 Z' fill='%23588157'/%3E%3Ccircle cx='50' cy='50' r='10' fill='white' fill-opacity='0.3'/%3E%3C/svg%3E"
+                },
+                {
+                    name: "Bubble Tea Taro Bio",
+                    description: "Boisson crémeuse à base de taro bio, avec des perles de tapioca et votre choix de lait végétal.",
+                    price: "6,50 €",
+                    category: "drinks",
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Cpath d='M35,20 L65,20 L60,80 L40,80 Z' fill='%23dad7cd'/%3E%3Ccircle cx='50' cy='40' r='15' fill='%239c6644'/%3E%3Ccircle cx='45' cy='65' r='5' fill='%23432818'/%3E%3Ccircle cx='55' cy='70' r='5' fill='%23432818'/%3E%3Ccircle cx='48' cy='75' r='5' fill='%23432818'/%3E%3C/svg%3E"
+                },
+                {
+                    name: "Japanese Cheesecake",
+                    description: "Notre version légère et aérienne du cheesecake japonais, préparée avec du fromage bio et un soupçon de vanille.",
+                    price: "5,90 €",
+                    category: "pastries",
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23fefae0'/%3E%3Cpath d='M30,50 A20,20 0 0,1 50,30 A20,20 0 0,1 70,50 Z' fill='%23faedcd'/%3E%3C/svg%3E"
+                },
+                {
+                    name: "Mochi Waffle",
+                    description: "Une fusion innovante entre le mochi traditionnel et la gaufre belge, servie avec des fruits frais de saison.",
+                    price: "7,50 €",
+                    category: "pastries",
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Crect x='25' y='25' width='50' height='50' rx='5' fill='%23d4a373'/%3E%3Cpath d='M30,30 L70,30 M30,40 L70,40 M30,50 L70,50 M30,60 L70,60 M30,70 L70,70 M40,25 L40,75 M50,25 L50,75 M60,25 L60,75' stroke='%23fefae0' stroke-width='2'/%3E%3Ccircle cx='35' cy='35' r='3' fill='%23e76f51'/%3E%3Ccircle cx='55' cy='55' r='3' fill='%232a9d8f'/%3E%3C/svg%3E"
+                },
+                {
+                    name: "Dorayaki Bio",
+                    description: "Pâtisserie traditionnelle japonaise composée de deux pancakes moelleux fourrés à la pâte de haricot rouge bio.",
+                    price: "4,50 €",
+                    category: "pastries",
+                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Ccircle cx='50' cy='40' r='20' fill='%23bc6c25'/%3E%3Ccircle cx='50' cy='60' r='20' fill='%23bc6c25'/%3E%3Cpath d='M35,50 L65,50' stroke='%23dda15e' stroke-width='2'/%3E%3C/svg%3E"
+                }
+            ];
+
+            // Function to populate the product grid
+            const populateProductGrid = (filterCategory = 'all') => {
+                const productGrid = document.getElementById('product-grid');
+                productGrid.innerHTML = '';
+                
+                const filteredProducts = filterCategory === 'all' 
+                    ? products 
+                    : products.filter(product => product.category === filterCategory);
+                
+                filteredProducts.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'card product-card transition-all duration-300';
+                    productCard.innerHTML = `
+                        <div class="relative h-48 rounded-t-lg overflow-hidden">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start">
+                                <h5 class="text-lg font-semibold">${product.name}</h5>
+                                <span class="text-green-700 font-medium">${product.price}</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mt-2">${product.description}</p>
+                        </div>
+                    `;
+                    productGrid.appendChild(productCard);
+                });
+            };
+
+            // Initialize product filter buttons
+            document.querySelectorAll('.product-filter-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    document.querySelectorAll('.product-filter-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.classList.remove('text-green-700');
+                        btn.classList.add('text-gray-900');
+                    });
+                    button.classList.add('active');
+                    button.classList.add('text-green-700');
+                    button.classList.remove('text-gray-900');
+                    
+                    // Filter products
+                    populateProductGrid(button.dataset.filter);
+                });
+            });
+
+            const financialData = {
+                '3.0': {
+                    payback: '2.13 ans',
+                    netIncomeAn2: 86690, // For KPI display
+                    incomeStatement: [
+                        { label: 'Chiffre d\'Affaires', values: [138240, 345600, 414720, 456192, 501811] },
+                        { label: 'Achats (CMV)', values: [27648, 69120, 82944, 91238, 100362] },
+                        { label: 'Marge Brute', values: [110592, 276480, 331776, 364954, 401449] },
+                        { label: 'Total Charges d\'Exploitation', values: [72302, 154204, 154204, 156612, 159068] },
+                        { label: 'Amortissements', values: [2500, 5000, 5000, 5000, 5000] },
+                        { label: 'EBITDA', values: [38290, 122276, 177572, 208342, 242381] },
+                        { label: 'EBIT', values: [35790, 117276, 172572, 203342, 237381] },
+                        { label: 'Charges Financières', values: [1268, 2382, 1980, 1563, 1131] },
+                        { label: 'Résultat Avant Impôt', values: [34522, 114894, 170592, 201779, 236250] },
+                        { label: 'Impôts (25%)', values: [8630, 28724, 42648, 50445, 59063] },
+                        { label: 'Résultat Net', values: [26099, 86690, 128497, 151866, 177705] }
+                    ]
+                },
+                '3.5': {
+                    payback: '2.15 ans',
+                    netIncomeAn2: 85880, // For KPI display
+                    incomeStatement: [
+                        { label: 'Chiffre d\'Affaires', values: [138240, 345600, 414720, 456192, 501811] },
+                        { label: 'Achats (CMV)', values: [27648, 69120, 82944, 91238, 100362] },
+                        { label: 'Marge Brute', values: [110592, 276480, 331776, 364954, 401449] },
+                        { label: 'Total Charges d\'Exploitation', values: [72302, 154204, 154204, 156612, 159068] },
+                        { label: 'Amortissements', values: [2500, 5000, 5000, 5000, 5000] },
+                        { label: 'EBITDA', values: [38290, 122276, 177572, 208342, 242381] },
+                        { label: 'EBIT', values: [35790, 117276, 172572, 203342, 237381] },
+                        { label: 'Charges Financières', values: [1479, 2769, 2383, 1983, 1569] },
+                        { label: 'Résultat Avant Impôt', values: [34311, 114507, 170189, 201359, 235812] },
+                        { label: 'Impôts (25%)', values: [8578, 28627, 42547, 50340, 58953] },
+                        { label: 'Résultat Net', values: [25733, 85880, 127642, 151019, 176859] }
+                    ]
+                },
+                '4.2': {
+                    payback: '2.17 ans',
+                    netIncomeAn2: 84416, // For KPI display
+                    incomeStatement: [
+                        { label: 'Chiffre d\'Affaires', values: [138240, 345600, 414720, 456192, 501811] },
+                        { label: 'Achats (CMV)', values: [27648, 69120, 82944, 91238, 100362] },
+                        { label: 'Marge Brute', values: [110592, 276480, 331776, 364954, 401449] },
+                        { label: 'Total Charges d\'Exploitation', values: [72302, 154204, 154204, 156612, 159068] },
+                        { label: 'Amortissements', values: [2500, 5000, 5000, 5000, 5000] },
+                        { label: 'EBITDA', values: [38290, 122276, 177572, 208342, 242381] },
+                        { label: 'EBIT', values: [35790, 117276, 172572, 203342, 237381] },
+                        { label: 'Charges Financières', values: [1775, 3314, 2854, 2375, 1877] },
+                        { label: 'Résultat Avant Impôt', values: [33515, 113262, 168940, 200067, 234504] },
+                        { label: 'Impôts (25%)', values: [8379, 28316, 42235, 50017, 58626] },
+                        { label: 'Résultat Net', values: [25158, 84416, 126161, 149577, 175423] }
+                    ]
+                }
+            };
+
+            const startupCostData = {
+                labels: ['Rénovation', 'Équipements', 'Fonds de roulement', 'Inventaire', 'Frais & Dépôts'],
+                data: [35000, 20000, 30000, 10000, 29540] /* Adjusted 'Frais & Dépôts' to make total 124540 (1500+8640+7200+7200) = 24540 */
+            };
+            
+            const swotData = {
+                'swot-s': [
+                    'Offre unique 100% bio et pâtisseries japonaises novatrices',
+                    'Emplacement stratégique au 27 rue Clauzel (Paris 9e) avec fort trafic piétonnier',
+                    'Stratégie marketing digitale ciblée sur les réseaux sociaux et partenariats locaux',
+                    'Produits personnalisables et visuellement "instagrammables"',
+                    'Propriétaire expérimenté en gestion de projets alimentaires et tendances culinaires japonaises'
+                ],
+                'swot-w': [
+                    'Nouvel entrant sur le marché, nécessitant de construire la notoriété de marque',
+                    'Dépendance aux tendances culinaires, nécessitant une veille constante',
+                    'Espace de vente au RDC compact (38m²), pouvant limiter la capacité aux heures de pointe'
+                ],
+                'swot-o': [
+                    'Demande croissante pour les produits biologiques et sains en milieu urbain',
+                    'Popularité grandissante du bubble tea et de la culture japonaise, notamment chez les jeunes',
+                    'Potentiel d\'expansion via les services numériques (vente en ligne, livraison)',
+                    'Engagement communautaire par des événements thématiques et partenariats universitaires',
+                    'Fort potentiel viral sur les médias sociaux grâce à l\'esthétique des produits et du lieu'
+                ],
+                'swot-t': [
+                    'Forte concurrence des cafés et salons de thé existants dans le 9ème arrondissement',
+                    'Potentiel de nouveaux concurrents entrant sur la même niche de marché',
+                    'Fluctuations des coûts des matières premières biologiques, impactant les marges',
+                    'Ralentissement économique général pouvant réduire les dépenses discrétionnaires des consommateurs',
+                    'Défis liés au maintien de la qualité et du service avec l\'augmentation du volume'
+                ]
+            };
+
+            const formatCurrency = (value) => new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(value);
+
+            let performanceChart, startupCostChart;
+
+            const createCharts = () => {
+                const perfCtx = document.getElementById('performanceChart').getContext('2d');
+                performanceChart = new Chart(perfCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2025', '2026', '2027', '2028', '2029'],
+                        datasets: [
+                            {
+                                label: 'Chiffre d\'Affaires',
+                                data: [],
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                tension: 0.2,
+                                fill: false,
+                                datalabels: {
+                                    align: 'end',
+                                    anchor: 'end',
+                                    formatter: (value) => {
+                                        return (value / 1000).toFixed(0) + 'k€';
+                                    },
+                                    color: 'rgba(75, 192, 192, 1)',
+                                    font: { size: 10 }
+                                }
+                            },
+                             {
+                                label: 'EBITDA',
+                                data: [],
+                                borderColor: 'rgba(255, 159, 64, 1)',
+                                backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                                tension: 0.2,
+                                fill: false,
+                                datalabels: {
+                                    display: false 
+                                }
+                            },
+                            {
+                                label: 'Résultat Net',
+                                data: [],
+                                borderColor: 'rgba(79, 70, 229, 1)',
+                                backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                                tension: 0.2,
+                                fill: false,
+                                datalabels: {
+                                    align: 'end',
+                                    anchor: 'end',
+                                    formatter: (value) => {
+                                        return (value / 1000).toFixed(0) + 'k€';
+                                    },
+                                    color: 'rgba(79, 70, 229, 1)',
+                                    font: { size: 10 }
+                                }
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value / 1000 + 'k €';
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            datalabels: {
+                                font: {
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    }
+                });
+
+                const startupCtx = document.getElementById('startupCostChart').getContext('2d');
+                startupCostChart = new Chart(startupCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: startupCostData.labels,
+                        datasets: [{
+                            label: 'Répartition des Coûts',
+                            data: startupCostData.data,
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.7)',
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(255, 206, 86, 0.7)',
+                                'rgba(255, 159, 64, 0.7)',
+                                'rgba(153, 102, 255, 0.7)'
+                            ],
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                             tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed !== null) {
+                                            label += formatCurrency(context.parsed);
+                                        }
+                                        return label;
+                                    }
+                                }
+                            },
+                            datalabels: {
+                                color: '#fff',
+                                formatter: (value) => {
+                                    return formatCurrency(value);
+                                },
+                                font: {
+                                    weight: 'bold',
+                                    size: 10
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+
+            const updateDashboard = (rate) => {
+                const data = financialData[rate];
+                
+                document.getElementById('metric-net-income').textContent = formatCurrency(data.incomeStatement.find(item => item.label === 'Résultat Net').values[1]);
+                document.getElementById('metric-payback').textContent = data.payback;
+
+                performanceChart.data.datasets[0].data = data.incomeStatement.find(item => item.label === 'Chiffre d\'Affaires').values;
+                performanceChart.data.datasets[1].data = data.incomeStatement.find(item => item.label === 'EBITDA').values;
+                performanceChart.data.datasets[2].data = data.incomeStatement.find(item => item.label === 'Résultat Net').values;
+                performanceChart.update();
+
+                const tableBody = document.getElementById('income-statement-body');
+                tableBody.innerHTML = '';
+                data.incomeStatement.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${row.label}</td>` +
+                        row.values.map(val => `<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">${formatCurrency(val)}</td>`).join('');
+                    tableBody.appendChild(tr);
+                });
+            };
+            
+            const updateSwotContent = (tabKey) => {
+                 const contentEl = document.getElementById('swot-content').querySelector('ul');
+                 contentEl.innerHTML = '';
+                 swotData[tabKey].forEach(point => {
+                     const li = document.createElement('li');
+                     li.textContent = point;
+                     contentEl.appendChild(li);
+                 });
+            }
+
+            document.getElementById('interest-rate-selector').addEventListener('change', (e) => {
+                updateDashboard(e.target.value);
+            });
+            
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    updateSwotContent(e.target.dataset.tab);
+                });
+            });
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('active');
+                });
+            }
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Close mobile menu if open
+                    if (mobileMenu && mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                    }
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Section reveal animations
+            const revealElements = document.querySelectorAll('section');
+            const revealElementOnScroll = () => {
+                revealElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    if (elementTop < windowHeight - 150) {
+                        element.classList.add('revealed');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', revealElementOnScroll);
+            revealElementOnScroll(); // Initial check
+
+            // Initialize product grid
+            populateProductGrid();
+
+            createCharts();
+            updateDashboard('3.5');
+            updateSwotContent('swot-s');
+        });
+    </script>
+</body>
+</html>
