@@ -4,31 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shiguré Café</title>
+    <title>Plan d'Affaires Interactif : Shiguré Café</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23588157'/%3E%3Cpath d='M30,35 C30,25 40,20 50,20 C60,20 70,25 70,35 C70,45 60,50 50,50 C40,50 30,45 30,35 Z' fill='white'/%3E%3Cpath d='M25,65 C25,55 65,55 75,65 L75,75 C75,80 65,85 50,85 C35,85 25,80 25,75 Z' fill='white'/%3E%3Cpath d='M40,40 C40,38 42,36 45,36 C48,36 50,38 50,40 C50,42 48,44 45,44 C42,44 40,42 40,40 Z' fill='%23588157'/%3E%3C/svg%3E" type="image/svg+xml">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23588157'/%3E%3Cpath d='M30,35 C30,25 40,20 50,20 C60,20 70,25 70,35 C70,45 60,50 50,50 C40,50 30,45 30,35 Z' fill='white'/%3E%3Cpath d='M25,65 C25,55 65,55 75,65 L75,75 C75,80 65,85 50,85 C35,85 25,80 25,75 Z' fill='white'/%3E%3Cpath d='M40,40 C40,38 42,36 45,36 C48,36 50,38 50,40 C50,42 48,44 45,44 C42,44 40,42 40,40 Z' fill='%23588157'/%3E%3C/svg%3E" type="image/svg+xml">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Serene Sage & Warm Wood (White, Natural Wood Tones, Soft Greys, Indigo Accents) -->
-    <!-- Application Structure Plan: A single-page application designed as a narrative journey. It starts with a high-level overview, then delves into the project's concept (expanded details), market analysis (more insights), and finally the interactive financial dashboard. The conclusion section provides key takeaways. This structure was chosen to guide the user from the "why" (the concept) to the "how" (the financials) in an intuitive, explorable manner, making complex data accessible and easy to understand, while integrating the new visual identity. -->
+    <!-- Application Structure Plan: A single-page application designed as a narrative journey. It starts with a high-level overview, then delves into the project's concept (expanded details), market analysis (more insights), the new 'Products' section for detailed offerings, and finally the interactive financial dashboard. The conclusion section provides key takeaways. This structure was chosen to guide the user from the "why" (the concept) to the "what" (the products), then the "how" (the financials) in an intuitive, explorable manner, making complex data accessible and easy to understand, while integrating the new visual identity and ensuring full mobile responsiveness. -->
     <!-- Visualization & Content Choices: 
         - Report Info: Project Summary -> Goal: Inform -> Viz: Hero section with key stats and a prominent logo. Justification: Provide an immediate, high-impact summary with branding.
-        - Report Info: Mission, Vision, Value Prop, Products/Services -> Goal: Organize & Inform -> Viz: Expanded text descriptions within cards. Justification: Offer more detailed qualitative info in digestible, visually appealing chunks.
+        - Report Info: Mission, Vision, Value Prop, Products/Services -> Goal: Organize & Inform -> Viz: Expanded text descriptions within cards, and dedicated product lists. Justification: Offer more detailed qualitative info in digestible, visually appealing chunks for both concept and product details.
         - Report Info: Market Target, Size & Trends, Competition, SWOT Analysis -> Goal: Organize & Inform -> Viz: Descriptive paragraphs for context and interactive Tabs for SWOT. Justification: Provide in-depth market context and allow focused exploration of each SWOT component.
         - Report Info: Financial Projections (Revenue, OpEx, Net Income, Loan details) -> Goal: Compare/Change/Organize -> Viz: Interactive Line Chart (Chart.js), detailed KPI cards, and dynamic data tables. The loan interest rate selector is the primary interaction for sensitivity analysis. Justification: Clearly shows trends and performance over time, and dynamically updates based on rate selection, offering both high-level and detailed views.
         - Report Info: Startup Costs & Funding Sources -> Goal: Inform -> Viz: Donut Charts (Chart.js). Justification: Provide quick, clear visual breakdowns of initial investment and its funding.
-        - Report Info: Conclusion, Insights, Risks, Recommendations -> Goal: Inform/Action -> Viz: Bulleted lists with descriptive text. Justification: Summarize findings and provide actionable advice.
+        - Report Info: Conclusion, Insights, Risks, Recommendations -> Goal: Inform/Action -> Viz: Bulleted lists with descriptive text. Justification: Summarize findings and provide actionable advice, maintaining emphasis where needed.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
@@ -117,53 +108,13 @@
             margin-top: 0.25rem; /* Small gap */
         }
 
-        /* Animation styles for sections */
-        section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+        /* Mobile menu specific styles */
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
         }
-
-        section.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile navigation styles */
-        .mobile-menu-button {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-button {
-                display: block;
-            }
-            
-            .mobile-menu {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                padding: 1rem;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            }
-            
-            .mobile-menu.active {
-                display: block;
-            }
-            
-            .mobile-menu a {
-                display: block;
-                padding: 0.75rem 0;
-                border-bottom: 1px solid #f3f4f6;
-            }
-        }
-
-        /* Subtle background pattern */
-        body {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23588157' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2V6h4V4H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        .mobile-menu.open {
+            transform: translateX(0);
         }
     </style>
 </head>
@@ -178,42 +129,53 @@
             </div>
             <div class="hidden md:flex space-x-8">
                 <a href="#concept" class="text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Le Concept</a>
+                <a href="#products" class="text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Nos Produits</a>
                 <a href="#marche" class="text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Marché</a>
                 <a href="#finance" class="text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Finances</a>
                 <a href="#conclusion" class="text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Conclusion</a>
             </div>
-            <!-- Mobile navigation menu -->
-            <button class="mobile-menu-button md:hidden flex items-center text-gray-500 hover:text-gray-900 focus:outline-none">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-            <div class="mobile-menu md:hidden">
-                <a href="#concept" class="block text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Le Concept</a>
-                <a href="#marche" class="block text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Marché</a>
-                <a href="#finance" class="block text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Finances</a>
-                <a href="#conclusion" class="block text-gray-600 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium">Conclusion</a>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 hover:text-green-700 focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
         </nav>
     </header>
 
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-menu fixed top-0 right-0 w-full h-full bg-white z-40 p-6 shadow-lg md:hidden">
+        <div class="flex justify-between items-center mb-8">
+            <div class="shigure-logo">
+                <span class="main-text">SHIGURÉ</span>
+                <span class="sub-text">CAFÉ</span>
+            </div>
+            <button id="close-mobile-menu" class="text-gray-600 hover:text-green-700 focus:outline-none">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-4">
+            <a href="#concept" class="text-gray-800 hover:text-green-700 text-lg font-medium py-2 border-b border-gray-100">Le Concept</a>
+            <a href="#products" class="text-gray-800 hover:text-green-700 text-lg font-medium py-2 border-b border-gray-100">Nos Produits</a>
+            <a href="#marche" class="text-gray-800 hover:text-green-700 text-lg font-medium py-2 border-b border-gray-100">Marché</a>
+            <a href="#finance" class="text-gray-800 hover:text-green-700 text-lg font-medium py-2 border-b border-gray-100">Finances</a>
+            <a href="#conclusion" class="text-gray-800 hover:text-green-700 text-lg font-medium py-2">Conclusion</a>
+        </nav>
+    </div>
+
     <main class="container mx-auto px-6 py-12">
 
         <section id="hero" class="text-center mb-20">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Shiguré Café</h2>
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Shiguré Café : Le Plan d'Affaires Interactif</h2>
             <p class="text-lg text-gray-600 max-w-3xl mx-auto">Une exploration dynamique du projet de café japonais bio à Paris. Découvrez le concept unique, l'analyse approfondie du marché et les projections financières détaillées d'une opportunité d'investissement viable et rentable dès la première année.</p>
         </section>
 
         <section id="concept" class="mb-20">
             <h3 class="section-title">Le Concept Shiguré Café : Authenticité et Modernité</h3>
-            
-            <div class="relative mb-12 rounded-xl overflow-hidden shadow-xl">
-                <img src="concept.png" alt="Shiguré Café Storefront" class="w-full object-cover" style="height: 800px;" />
-                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center p-6">
-                    <p class="text-white text-center text-lg max-w-2xl">Shiguré Café est bien plus qu'un simple café ; c'est une invitation à un voyage sensoriel au cœur de Paris, où la tradition japonaise rencontre l'innovation biologique dans un cadre chaleureux et esthétique.</p>
-                </div>
-            </div>
-            
+            <p class="text-gray-700 mb-8 max-w-3xl mx-auto text-center">Shiguré Café est bien plus qu'un simple café ; c'est une invitation à un voyage sensoriel au cœur de Paris, où la tradition japonaise rencontre l'innovation biologique dans un cadre chaleureux et esthétique.</p>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="card">
                     <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-50 text-green-700 mb-4 text-xl">
@@ -237,21 +199,24 @@
                     <p class="text-gray-600 text-sm">Le choix de notre emplacement est crucial. Le local de 49m² (38m² au RDC pour l'accueil et 11m² de cave, idéale pour le stockage ou la préparation annexe) est situé au 27 rue Clauzel, 75009 PARIS, en face de la très fréquentée Place Gustave Toudouze. Cette zone bénéficie d'un fort trafic piétonnier, à proximité d'écoles, de bureaux et de lieux de vie parisiens, garantissant une visibilité optimale et un accès facile à notre clientèle cible : jeunes, étudiants et jeunes adultes recherchant des expériences culinaires uniques.</p>
                 </div>
             </div>
+        </section>
+
+        <section id="products" class="mb-20">
+            <h3 class="section-title">Découvrez Nos Produits : Saveurs Bio et Originalité Japonaise</h3>
+            <p class="text-gray-700 mb-8 max-w-3xl mx-auto text-center">Notre carte a été conçue pour surprendre et ravir les papilles, en alliant la fraîcheur des ingrédients biologiques à l'authenticité des saveurs japonaises, avec une touche de modernité.</p>
             
-            <!-- Product Explorer Section -->
-            <div class="mt-16">
-                <h4 class="text-2xl font-semibold text-center mb-8">Découvrez Nos Produits</h4>
-                
-                <div class="flex justify-center mb-6">
-                    <div class="inline-flex rounded-md shadow-sm" role="group">
-                        <button type="button" class="product-filter-btn active px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:text-green-700" data-filter="all">Tous</button>
-                        <button type="button" class="product-filter-btn px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:text-green-700" data-filter="drinks">Boissons</button>
-                        <button type="button" class="product-filter-btn px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:text-green-700" data-filter="pastries">Pâtisseries</button>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-4 text-center">Boissons 🥤</h4>
+                    <div id="boissons-list" class="space-y-4">
+                        <!-- Products will be injected here by JS -->
                     </div>
                 </div>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="product-grid">
-                    <!-- Product cards will be inserted here by JavaScript -->
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-4 text-center">Pâtisseries Japonaises 🍰</h4>
+                    <div id="patisseries-list" class="space-y-4">
+                        <!-- Products will be injected here by JS -->
+                    </div>
                 </div>
             </div>
         </section>
@@ -264,9 +229,9 @@
                 <h4 class="text-xl font-semibold mb-4">Notre Marché Cible : Jeunes et Connectés</h4>
                 <p class="text-gray-600 text-sm mb-4">Notre clientèle idéale se compose principalement de jeunes, d'étudiants et de jeunes adultes âgés de 15 à 30 ans. Ce segment démographique est caractérisé par une forte sensibilité aux tendances culinaires, une activité intense sur les réseaux sociaux (Instagram, TikTok), et une préférence marquée pour les produits biologiques, personnalisables et visuellement attrayants. Ils recherchent non seulement une boisson ou une pâtisserie, mais aussi une expérience sociale et un lieu propice au partage et à la création de contenu visuel.</p>
                 <h4 class="text-xl font-semibold mb-4">Taille du Marché et Tendances Clés</h4>
-                <p class="text-gray-600 text-sm mb-4">Le marché français du <strong>Bubble Tea</strong> affiche un chiffre d'affaires moyen impressionnant, variant de 240 000 € à 360 000 € par boutique annuellement, preuve de son immense popularité chez les jeunes. Parallèlement, les <strong>pâtisseries japonaises</strong>, bien que plus de niche, gagnent rapidement en visibilité grâce à leur esthétique unique, parfaitement adaptée aux médias sociaux. Le marché global du <strong>café et du thé de spécialité en France, évalué à 4,5 milliards €</strong>, est en constante croissance, avec une demande accrue pour les options biologiques comme le Matcha et le Hojicha. Ces tendances convergentes créent un environnement propice à la croissance de Shiguré Café.</p>
+                <p class="text-gray-600 text-sm mb-4">Le marché français du **Bubble Tea** affiche un chiffre d'affaires moyen impressionnant, variant de 240 000 € à 360 000 € par boutique annuellement, preuve de son immense popularité chez les jeunes. Parallèlement, les **pâtisseries japonaises**, bien que plus de niche, gagnent rapidement en visibilité grâce à leur esthétique unique, parfaitement adaptée aux médias sociaux. Le marché global du **café et du thé de spécialité en France, évalué à 4,5 milliards €**, est en constante croissance, avec une demande accrue pour les options biologiques comme le Matcha et le Hojicha. Ces tendances convergentes créent un environnement propice à la croissance de Shiguré Café.</p>
                 <h4 class="text-xl font-semibold mb-4">Concurrence et Notre Avantage Différenciateur</h4>
-                <p class="text-gray-600 text-sm mb-4">Le 9ème arrondissement, comme beaucoup de quartiers parisiens, compte déjà une dizaine de boutiques de bubble tea et de nombreux cafés traditionnels. Cependant, ces concurrents manquent souvent d'une offre 100% biologique ou de l'originalité des pâtisseries japonaises. Notre avantage concurrentiel réside dans l'intégration de ces éléments : des ingrédients entièrement biologiques, des créations uniques et visuellement attractantes, un design intérieur moderne et "instagrammable", et une stratégie marketing axée sur les réseaux sociaux et des partenariats universitaires locaux. Cela nous permet de nous positionner sur un segment premium tout en restant accessible.</p>
+                <p class="text-gray-600 text-sm mb-4">Le 9ème arrondissement, comme beaucoup de quartiers parisiens, compte déjà une dizaine de boutiques de bubble tea et de nombreux cafés traditionnels. Cependant, ces concurrents manquent souvent d'une offre 100% biologique ou de l'originalité des pâtisseries japonaises. Notre avantage concurrentiel réside dans l'intégration de ces éléments : des ingrédients entièrement biologiques, des créations uniques et visuellement attractives, un design intérieur moderne et "instagrammable", et une stratégie marketing axée sur les réseaux sociaux et des partenariats universitaires locaux. Cela nous permet de nous positionner sur un segment premium tout en restant accessible.</p>
             </div>
             
             <div class="card mt-8">
@@ -416,98 +381,6 @@
 
             // Register the datalabels plugin
             Chart.register(ChartDataLabels);
-            
-            // Product data for the product explorer
-            const products = [
-                {
-                    name: "Matcha Latte Bio",
-                    description: "Notre spécialité signature, préparée avec du matcha bio de qualité supérieure et du lait d'amande ou d'avoine.",
-                    price: "5,50 €",
-                    category: "drinks",
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23588157'/%3E%3Cpath d='M35,65 L65,65 L60,40 L40,40 Z' fill='white'/%3E%3Cpath d='M42,40 L58,40 L55,30 L45,30 Z' fill='%23588157'/%3E%3C/svg%3E"
-                },
-                {
-                    name: "Hojicha Latte Bio",
-                    description: "Thé vert japonais torréfié, servi glacé avec une touche de sirop d'érable bio et un zeste de citron.",
-                    price: "5,50 €",
-                    category: "drinks",
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Cpath d='M40,20 L60,20 L65,80 L35,80 Z' fill='%23a3b18a'/%3E%3Cpath d='M45,25 L55,25 L53,35 L47,35 Z' fill='%23588157'/%3E%3Ccircle cx='50' cy='50' r='10' fill='white' fill-opacity='0.3'/%3E%3C/svg%3E"
-                },
-                {
-                    name: "Bubble Tea Taro Bio",
-                    description: "Boisson crémeuse à base de taro bio, avec des perles de tapioca et votre choix de lait végétal.",
-                    price: "6,50 €",
-                    category: "drinks",
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Cpath d='M35,20 L65,20 L60,80 L40,80 Z' fill='%23dad7cd'/%3E%3Ccircle cx='50' cy='40' r='15' fill='%239c6644'/%3E%3Ccircle cx='45' cy='65' r='5' fill='%23432818'/%3E%3Ccircle cx='55' cy='70' r='5' fill='%23432818'/%3E%3Ccircle cx='48' cy='75' r='5' fill='%23432818'/%3E%3C/svg%3E"
-                },
-                {
-                    name: "Japanese Cheesecake",
-                    description: "Notre version légère et aérienne du cheesecake japonais, préparée avec du fromage bio et un soupçon de vanille.",
-                    price: "5,90 €",
-                    category: "pastries",
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23fefae0'/%3E%3Cpath d='M30,50 A20,20 0 0,1 50,30 A20,20 0 0,1 70,50 Z' fill='%23faedcd'/%3E%3C/svg%3E"
-                },
-                {
-                    name: "Mochi Waffle",
-                    description: "Une fusion innovante entre le mochi traditionnel et la gaufre belge, servie avec des fruits frais de saison.",
-                    price: "7,50 €",
-                    category: "pastries",
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Crect x='25' y='25' width='50' height='50' rx='5' fill='%23d4a373'/%3E%3Cpath d='M30,30 L70,30 M30,40 L70,40 M30,50 L70,50 M30,60 L70,60 M30,70 L70,70 M40,25 L40,75 M50,25 L50,75 M60,25 L60,75' stroke='%23fefae0' stroke-width='2'/%3E%3Ccircle cx='35' cy='35' r='3' fill='%23e76f51'/%3E%3Ccircle cx='55' cy='55' r='3' fill='%232a9d8f'/%3E%3C/svg%3E"
-                },
-                {
-                    name: "Dorayaki Bio",
-                    description: "Pâtisserie traditionnelle japonaise composée de deux pancakes moelleux fourrés à la pâte de haricot rouge bio.",
-                    price: "4,50 €",
-                    category: "pastries",
-                    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Ccircle cx='50' cy='40' r='20' fill='%23bc6c25'/%3E%3Ccircle cx='50' cy='60' r='20' fill='%23bc6c25'/%3E%3Cpath d='M35,50 L65,50' stroke='%23dda15e' stroke-width='2'/%3E%3C/svg%3E"
-                }
-            ];
-
-            // Function to populate the product grid
-            const populateProductGrid = (filterCategory = 'all') => {
-                const productGrid = document.getElementById('product-grid');
-                productGrid.innerHTML = '';
-                
-                const filteredProducts = filterCategory === 'all' 
-                    ? products 
-                    : products.filter(product => product.category === filterCategory);
-                
-                filteredProducts.forEach(product => {
-                    const productCard = document.createElement('div');
-                    productCard.className = 'card product-card transition-all duration-300';
-                    productCard.innerHTML = `
-                        <div class="relative h-48 rounded-t-lg overflow-hidden">
-                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
-                        </div>
-                        <div class="p-4">
-                            <div class="flex justify-between items-start">
-                                <h5 class="text-lg font-semibold">${product.name}</h5>
-                                <span class="text-green-700 font-medium">${product.price}</span>
-                            </div>
-                            <p class="text-gray-600 text-sm mt-2">${product.description}</p>
-                        </div>
-                    `;
-                    productGrid.appendChild(productCard);
-                });
-            };
-
-            // Initialize product filter buttons
-            document.querySelectorAll('.product-filter-btn').forEach(button => {
-                button.addEventListener('click', () => {
-                    // Update active button
-                    document.querySelectorAll('.product-filter-btn').forEach(btn => {
-                        btn.classList.remove('active');
-                        btn.classList.remove('text-green-700');
-                        btn.classList.add('text-gray-900');
-                    });
-                    button.classList.add('active');
-                    button.classList.add('text-green-700');
-                    button.classList.remove('text-gray-900');
-                    
-                    // Filter products
-                    populateProductGrid(button.dataset.filter);
-                });
-            });
 
             const financialData = {
                 '3.0': {
@@ -565,7 +438,7 @@
 
             const startupCostData = {
                 labels: ['Rénovation', 'Équipements', 'Fonds de roulement', 'Inventaire', 'Frais & Dépôts'],
-                data: [35000, 20000, 30000, 10000, 29540] /* Adjusted 'Frais & Dépôts' to make total 124540 (1500+8640+7200+7200) = 24540 */
+                data: [35000, 20000, 30000, 10000, 29540]
             };
             
             const swotData = {
@@ -578,6 +451,7 @@
                 ],
                 'swot-w': [
                     'Nouvel entrant sur le marché, nécessitant de construire la notoriété de marque',
+                    'Structure d\'entreprise individuelle pouvant entraîner une forte dépendance au propriétaire',
                     'Dépendance aux tendances culinaires, nécessitant une veille constante',
                     'Espace de vente au RDC compact (38m²), pouvant limiter la capacité aux heures de pointe'
                 ],
@@ -596,6 +470,20 @@
                     'Défis liés au maintien de la qualité et du service avec l\'augmentation du volume'
                 ]
             };
+
+            const productData = {
+                boissons: [
+                    { name: 'Bubble Tea Bio', price: '7,50 €', description: 'Thé noir/vert bio, perles de tapioca ou popping boba, personnalisable (lait végétal, sucre).' },
+                    { name: 'Café Latte Bio', price: '5,00 €', description: 'Café de spécialité bio, lait bio (vache ou végétal), crémeux et onctueux.' },
+                    { name: 'Matcha Latte Bio', price: '6,00 €', description: 'Matcha cérémonial bio du Japon, lait bio (vache ou végétal), boisson énergisante et apaisante.' },
+                    { name: 'Hojicha Glacé Bio', price: '6,00 €', description: 'Thé Hojicha bio torréfié du Japon, servi glacé. Saveur unique et légèrement fumée, rafraîchissant.' }
+                ],
+                patisseries: [
+                    { name: 'Japanese Cheesecake', price: '6,00 €', description: 'Cheesecake léger et aérien de style japonais, saveur délicate et texture fondante.' },
+                    { name: 'Mochi Waffle', price: '6,00 €', description: 'Gaufre croustillante à l\'extérieur et moelleuse à l\'intérieur, faite avec de la farine de mochi. Servi avec des garnitures variées.' }
+                ]
+            };
+
 
             const formatCurrency = (value) => new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(value);
 
@@ -736,7 +624,7 @@
             const updateDashboard = (rate) => {
                 const data = financialData[rate];
                 
-                document.getElementById('metric-net-income').textContent = formatCurrency(data.incomeStatement.find(item => item.label === 'Résultat Net').values[1]);
+                document.getElementById('metric-net-income').textContent = formatCurrency(data.netIncomeAn2);
                 document.getElementById('metric-payback').textContent = data.payback;
 
                 performanceChart.data.datasets[0].data = data.incomeStatement.find(item => item.label === 'Chiffre d\'Affaires').values;
@@ -764,6 +652,40 @@
                  });
             }
 
+            const renderProducts = () => {
+                const boissonsList = document.getElementById('boissons-list');
+                const patisseriesList = document.getElementById('patisseries-list');
+
+                boissonsList.innerHTML = '';
+                productData.boissons.forEach(product => {
+                    const div = document.createElement('div');
+                    div.className = 'flex items-start space-x-3 p-3 bg-gray-100 rounded-md';
+                    div.innerHTML = `
+                        <div class="flex-shrink-0 text-2xl">☕</div>
+                        <div>
+                            <h5 class="text-md font-semibold text-gray-800">${product.name} <span class="text-green-700 ml-2">${product.price}</span></h5>
+                            <p class="text-gray-600 text-xs">${product.description}</p>
+                        </div>
+                    `;
+                    boissonsList.appendChild(div);
+                });
+
+                patisseriesList.innerHTML = '';
+                productData.patisseries.forEach(product => {
+                    const div = document.createElement('div');
+                    div.className = 'flex items-start space-x-3 p-3 bg-gray-100 rounded-md';
+                    div.innerHTML = `
+                        <div class="flex-shrink-0 text-2xl">🍰</div>
+                        <div>
+                            <h5 class="text-md font-semibold text-gray-800">${product.name} <span class="text-green-700 ml-2">${product.price}</span></h5>
+                            <p class="text-gray-600 text-xs">${product.description}</p>
+                        </div>
+                    `;
+                    patisseriesList.appendChild(div);
+                });
+            };
+
+
             document.getElementById('interest-rate-selector').addEventListener('change', (e) => {
                 updateDashboard(e.target.value);
             });
@@ -777,52 +699,29 @@
             });
 
             // Mobile menu toggle
-            const mobileMenuButton = document.querySelector('.mobile-menu-button');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('active');
-                });
-            }
-            
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Close mobile menu if open
-                    if (mobileMenu && mobileMenu.classList.contains('active')) {
-                        mobileMenu.classList.remove('active');
-                    }
-                    
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenuOverlay.classList.add('open');
+            });
+
+            closeMobileMenuButton.addEventListener('click', () => {
+                mobileMenuOverlay.classList.remove('open');
+            });
+
+            mobileMenuOverlay.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuOverlay.classList.remove('open');
                 });
             });
-            
-            // Section reveal animations
-            const revealElements = document.querySelectorAll('section');
-            const revealElementOnScroll = () => {
-                revealElements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    if (elementTop < windowHeight - 150) {
-                        element.classList.add('revealed');
-                    }
-                });
-            };
-            
-            window.addEventListener('scroll', revealElementOnScroll);
-            revealElementOnScroll(); // Initial check
 
-            // Initialize product grid
-            populateProductGrid();
 
             createCharts();
             updateDashboard('3.5');
             updateSwotContent('swot-s');
+            renderProducts();
         });
     </script>
 </body>
