@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shigure Café シグレ - Your Daily Ritual, Elevated.</title>
+    <meta name="description" content="Shigure Café in Paris offers artisanal coffee, ceremonial matcha, fresh pastries, and a serene Japanese-inspired atmosphere. Experience Parisian café culture with Japanese elegance at 27 rue Clauzel, 75009.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <img src="assets/images/logo.png" alt="Shigure Logo" class="logo">
+            </a>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="location.html">Location</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="coffee-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Your Daily Ritual,</h1>
+                <h1 class="hero-title-accent">Elevated.</h1>
+                <a href="menu.html" class="btn btn-primary btn-large hero-cta">
+                    <i class="fas fa-arrow-right"></i>
+                    Explore Our Menu
+                </a>
+            </div>
+        </section>
+
+        <section class="brand-story anim-fade-in">
+            <div class="container">
+                <h2>In Paris, a Gentle Rain of Coffee & Tea</h2>
+                <p>Shigure (シグレ) is the Japanese word for a passing autumn shower—a brief, quiet moment of reflection. Here, we invite you to find your own moment of calm. Inspired by the elegance of Japanese tea culture and the warmth of Parisian cafés, we offer a space to pause, sip, and savor. Each cup is a tribute to craftsmanship, from our carefully sourced beans to our ceremonial-grade matcha.</p>
+                <a href="about.html" class="btn">Discover Our Story</a>
+            </div>
+        </section>
+
+        <section class="highlights anim-fade-in">
+            <div class="container">
+                <h2 class="section-title">What We're Known For</h2>
+                <div class="highlights-grid">
+                    <a href="#" class="highlight-card">
+                        <picture>
+                            <source srcset="assets/images/coffee.webp" type="image/webp">
+                            <img src="assets/images/coffee.webp" alt="A cup of specialty coffee" class="highlight-card-bg">
+                        </picture>
+                        <h3>Specialty Coffee</h3>
+                    </a>
+                    <a href="#" class="highlight-card">
+                        <picture>                            
+                            <source srcset="assets/images/matcha.png" type="image/png">
+                            <img src="assets/images/matcha.png" alt="A bowl of ceremonial matcha" class="highlight-card-bg">
+                        </picture>
+                        <h3>Ceremonial Matcha</h3>
+                    </a>
+                    <a href="#" class="highlight-card">
+                        <picture>                            
+                            <source srcset="assets/images/interior.png" type="image/png">
+                            <img src="assets/images/interior.png" alt="The interior of Shigure Cafe" class="highlight-card-bg">
+                        </picture>
+                        <h3>A Space to Vibe</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="hours-snippet anim-fade-in">
+            <div class="container">
+                <h4>Drop By Today</h4>
+                <p>We're Open Until 7:00 PM</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <img src="assets/images/logo.png" alt="Shigure Logo" class="footer-logo">
+                    <p>Your daily ritual, elevated.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/shigure.cafe?igsh=MTVmZnA4N2JkY3pncA%3D%3D&utm_source=qr" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Navigate</h4>
+                    <ul class="footer-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="location.html">Location</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Hours</h4>
+                    <p>Monday-Thursday: 8.30am-6pm<br>Friday-Sunday: 9am-8pm</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <p>27 rue Clauzel<br>75009 Paris<br><a href="mailto:shigure.cafe@gmail.com">shigure.cafe@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Shigure Café. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+
+</body>
+</html>
