@@ -24,7 +24,7 @@
       "dest": "/assets/$1"
     },
     {
-      "src": "/(.*\.(html|css|js))",
+      "src": "/(.*\\.(html|css|js))",
       "dest": "/$1"
     },
     {
